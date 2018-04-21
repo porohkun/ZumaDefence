@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class Unit : MonoBehaviour
+public class Unit : ZumaItem
 {
-    public Waypoint[] Waypoints;
     public Sprite[] HealthSprites;
+    
+    [SerializeField]
+    private SpriteRenderer _hpRenderer;
+    
 }

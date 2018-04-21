@@ -40,6 +40,7 @@ public class EditorMap : MonoBehaviour
                 {
                     if (vp.Next == null)
                         vp.Next = _map.Waypoints[i + 1];
+                    vp.Next.Preview = vp;
                     vp.Line.SetPosition(1, vp.Next.transform.position - vp.transform.position);
                 }
             }
