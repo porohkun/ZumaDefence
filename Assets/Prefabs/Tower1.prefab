@@ -51,7 +51,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4855289411287160}
-  - component: {fileID: 114242487080489202}
+  - component: {fileID: 114204074328881342}
   m_Layer: 0
   m_Name: Tower1
   m_TagString: Untagged
@@ -100,7 +100,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114242487080489202
+--- !u!114 &114204074328881342
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1559321266568288}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bcc388cba93abb40884c30359b4d974, type: 3}
+  m_Script: {fileID: 11500000, guid: 4466957587758424899fbc056fb22cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _sprite: {fileID: 4656551139032430}
@@ -116,21 +116,6 @@ MonoBehaviour:
   LastWaypoint: {fileID: 0}
   Preview: {fileID: 0}
   Next: {fileID: 0}
-  HealthSprites:
-  - {fileID: 21300024, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
-  - {fileID: 21300006, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
-  - {fileID: 21300004, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
-  - {fileID: 21300002, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
-  - {fileID: 21300000, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
-  - {fileID: 21300014, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
-  - {fileID: 21300012, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
-  - {fileID: 21300010, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
-  - {fileID: 21300008, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
-  - {fileID: 21300022, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
-  - {fileID: 21300020, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
-  - {fileID: 21300018, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
-  - {fileID: 21300016, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
-  _hpRenderer: {fileID: 212569562138375572}
 --- !u!212 &212379690493251014
 SpriteRenderer:
   m_ObjectHideFlags: 1
