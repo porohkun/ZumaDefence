@@ -112,8 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sprite: {fileID: 4823313305578320}
-  Waypoints: []
-  LastWaypoint: {fileID: 0}
+  _hpRenderer: {fileID: 212323474554503376}
   HealthSprites:
   - {fileID: 21300024, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
   - {fileID: 21300006, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
@@ -128,7 +127,11 @@ MonoBehaviour:
   - {fileID: 21300020, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
   - {fileID: 21300018, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
   - {fileID: 21300016, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
-  _hpRenderer: {fileID: 212323474554503376}
+  Waypoints: []
+  LastWaypoint: {fileID: 0}
+  _maxHealth: 6
+  Preview: {fileID: 0}
+  Next: {fileID: 0}
 --- !u!212 &212323474554503376
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -161,7 +164,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 49092119
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300016, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
@@ -205,7 +208,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2009797453
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1c31642e5e304764682380085b0c25e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

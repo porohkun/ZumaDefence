@@ -10,13 +10,17 @@ public class EditorMap : MonoBehaviour
     [SerializeField]
     private Map _map;
 
-    private void Start()
+    private void Awake()
     {
         if (Application.platform == RuntimePlatform.WindowsEditor && Application.isPlaying)
         {
+            Update();
             if (_map != null)
                 for (int i = 0; i < _map.Waypoints.Length; i++)
+                {
                     _map.Waypoints[i].gameObject.SetActive(false);
+                    _map.Waypoints[i].Start();
+                }
             Destroy(this);
         }
     }

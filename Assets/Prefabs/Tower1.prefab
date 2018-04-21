@@ -112,10 +112,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sprite: {fileID: 4656551139032430}
+  _hpRenderer: {fileID: 212569562138375572}
+  HealthSprites:
+  - {fileID: 21300024, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
+  - {fileID: 21300006, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
+  - {fileID: 21300004, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
+  - {fileID: 21300002, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
+  - {fileID: 21300000, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
+  - {fileID: 21300014, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
+  - {fileID: 21300012, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
+  - {fileID: 21300010, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
+  - {fileID: 21300008, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
+  - {fileID: 21300022, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
+  - {fileID: 21300020, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
+  - {fileID: 21300018, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
+  - {fileID: 21300016, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
   Waypoints: []
   LastWaypoint: {fileID: 0}
-  Preview: {fileID: 0}
-  Next: {fileID: 0}
+  _maxHealth: 5
+  Cost: 10
 --- !u!212 &212379690493251014
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -195,7 +210,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300016, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
-  m_Color: {r: 0, g: 0.383, b: 0, a: 1}
+  m_Color: {r: 0.46323532, g: 1, b: 0.46323532, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

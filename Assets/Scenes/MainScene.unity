@@ -384,8 +384,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 59882431}
-  Preview: {fileID: 282670154}
-  Next: {fileID: 1760005346}
 --- !u!1 &69078439
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,8 +574,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 69078442}
-  Preview: {fileID: 1130536163}
-  Next: {fileID: 1842213693}
 --- !u!1 &282670149
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,8 +764,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 282670152}
-  Preview: {fileID: 1035661577}
-  Next: {fileID: 59882433}
 --- !u!1 &286785623
 GameObject:
   m_ObjectHideFlags: 0
@@ -1091,8 +1085,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 679518921}
-  Preview: {fileID: 1842213693}
-  Next: {fileID: 778910405}
 --- !u!1 &728616114
 GameObject:
   m_ObjectHideFlags: 0
@@ -1283,8 +1275,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 728616117}
-  Preview: {fileID: 1152758260}
-  Next: {fileID: 1377472050}
 --- !u!1 &735889940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,6 +1477,8 @@ MonoBehaviour:
   _unitsRoot: {fileID: 1069611971}
   _unitPrefab: {fileID: 114433161626671274, guid: bd246c50f6bbafc449e09c7fb0e2f5b4,
     type: 2}
+  Money: 100
+  Score: 0
 --- !u!212 &772290562
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1738,8 +1730,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 778910403}
-  Preview: {fileID: 679518923}
-  Next: {fileID: 1152758260}
 --- !u!1 &905903596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1919,8 +1909,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 1035661578}
-  Preview: {fileID: 1377472050}
-  Next: {fileID: 282670154}
 --- !u!120 &1035661578
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -2298,8 +2286,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 1120782992}
-  Preview: {fileID: 1956898767}
-  Next: {fileID: 1389991310}
 --- !u!1 &1130536158
 GameObject:
   m_ObjectHideFlags: 0
@@ -2490,8 +2476,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 1130536161}
-  Preview: {fileID: 1859752171}
-  Next: {fileID: 69078444}
 --- !u!1 &1136695959
 GameObject:
   m_ObjectHideFlags: 0
@@ -2917,8 +2901,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 1152758258}
-  Preview: {fileID: 778910405}
-  Next: {fileID: 728616119}
 --- !u!1 &1154662248
 GameObject:
   m_ObjectHideFlags: 0
@@ -3109,8 +3091,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 1154662251}
-  Preview: {fileID: 1760005346}
-  Next: {fileID: 1513696356}
 --- !u!1 &1331387030
 GameObject:
   m_ObjectHideFlags: 0
@@ -3396,8 +3376,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 1377472048}
-  Preview: {fileID: 728616119}
-  Next: {fileID: 1035661577}
 --- !u!1 &1389991309
 GameObject:
   m_ObjectHideFlags: 0
@@ -3429,8 +3407,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 1389991311}
-  Preview: {fileID: 1120782994}
-  Next: {fileID: 0}
 --- !u!120 &1389991311
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -3849,8 +3825,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 1513696354}
-  Preview: {fileID: 1154662253}
-  Next: {fileID: 1956898767}
 --- !u!1 &1760005341
 GameObject:
   m_ObjectHideFlags: 0
@@ -4041,8 +4015,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 1760005344}
-  Preview: {fileID: 59882433}
-  Next: {fileID: 1154662253}
 --- !u!1 &1810721481
 GameObject:
   m_ObjectHideFlags: 0
@@ -4461,8 +4433,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 1842213691}
-  Preview: {fileID: 69078444}
-  Next: {fileID: 679518923}
 --- !u!1 &1859752166
 GameObject:
   m_ObjectHideFlags: 0
@@ -4653,8 +4623,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 1859752169}
-  Preview: {fileID: 0}
-  Next: {fileID: 1130536163}
 --- !u!1 &1956898762
 GameObject:
   m_ObjectHideFlags: 0
@@ -4845,8 +4813,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Line: {fileID: 1956898765}
-  Preview: {fileID: 1513696356}
-  Next: {fileID: 1120782994}
 --- !u!1 &2025786669
 GameObject:
   m_ObjectHideFlags: 0
@@ -5041,6 +5007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e41c13849498ab48a0a632e9ac1e5a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _map: {fileID: 772290561}
   _moneyLabel: {fileID: 2025786671}
   _moneyPrefix: 'Money: $'
   _scoreLabel: {fileID: 905903598}

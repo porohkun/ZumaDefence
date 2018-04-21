@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    public const float ItemSize = 32;
     [SerializeField]
     private float _speed = 5f;
     public Waypoint[] Waypoints;
@@ -14,29 +13,46 @@ public class Map : MonoBehaviour
     private Transform _unitsRoot;
     [SerializeField]
     private Unit _unitPrefab;
+    public int Money;
+    public int Score;
 
     private List<ZumaItem> _items = new List<ZumaItem>();
 
     private void Update()
     {
-        if (_items.Count == 0 || (_items[0].transform.position - Waypoints[0].transform.position).magnitude >= ItemSize)
+        if (_items.Count == 0 || (_items[0].transform.position - Waypoints[0].transform.position).magnitude >= Settings.ItemSize)
         {
             CreateUnit();
             UpdateIndexes();
         }
 
-        foreach (var item in _items)
+        for (int i = _items.Count - 1; i >= 0; i--)
         {
-            item.Distance += _speed * Time.deltaTime;
+            var item = _items[i];
+            if (item.Destroyed)
+            {
+                _items.Remove(item);
+                item.transform.position = Vector3.left * 1000f;
+            }
+            else
+                item.Distance += _speed * Time.deltaTime;
         }
+
+
     }
 
-    public void CreateTower(Tower prefab, Vector3 startPosition, Vector3 direction)
+    public bool CreateTower(Tower prefab, Vector3 startPosition, Vector3 direction)
     {
-        var tower = Instantiate(prefab, _unitsRoot);
-        tower.transform.localPosition = startPosition;
-        tower.Waypoints = Waypoints;
-        tower.BeginFly(_items,direction);
+        if (Money >= prefab.Cost)
+        {
+            Money -= prefab.Cost;
+            var tower = Instantiate(prefab, _unitsRoot);
+            tower.transform.localPosition = startPosition;
+            tower.Waypoints = Waypoints;
+            tower.BeginFly(_items, direction);
+            return true;
+        }
+        return false;
     }
 
     private void CreateUnit()
@@ -49,7 +65,7 @@ public class Map : MonoBehaviour
         {
             var dir = Waypoints[0].transform.position - _items[0].transform.position;
             var magn = dir.magnitude;
-            unit.transform.localPosition = Waypoints[0].transform.localPosition + dir.normalized * (magn - ItemSize);
+            unit.transform.localPosition = Waypoints[0].transform.localPosition + dir.normalized * (magn - Settings.ItemSize);
 
             var next = _items[0];
             unit.Next = next;

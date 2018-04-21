@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Waypoint : MonoBehaviour
+public class Waypoint : MonoBehaviour, ITwoDirections<Waypoint>
 {
     public LineRenderer Line;
-    public Waypoint Preview;
-    public Waypoint Next;
+    public Waypoint Preview { get; set; }
+    public Waypoint Next { get; set; }
 
     public float DistanceToNext { get; private set; }
     public Vector3 Direction { get { return (Next.transform.position - transform.position).normalized; } }
@@ -26,7 +26,7 @@ public class Waypoint : MonoBehaviour
         }
     }
 
-    public void Awake()
+    public void Start()
     {
         if (Next != null)
             DistanceToNext = transform.position.DistanceTo(Next.transform.position);

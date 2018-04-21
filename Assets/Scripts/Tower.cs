@@ -7,8 +7,7 @@ using UnityEngine;
 
 public class Tower : ZumaItem
 {
-    const float _flySpeed = 400f;
-    const float _insertTime = 0.1f;
+    public int Cost;
 
     private bool _inLine = false;
 
@@ -24,13 +23,13 @@ public class Tower : ZumaItem
         while (collider == null)
         {
             yield return null;
-            transform.localPosition += direction * _flySpeed * Time.deltaTime;
+            transform.localPosition += direction * Settings.TowerFlySpeed * Time.deltaTime;
 
             if (transform.position.x < -500 || transform.position.x > 500 || transform.position.y < -300 || transform.position.y > 300)
                 Destroy(gameObject);
 
             foreach (var item in items)
-                if (item.transform.position.DistanceTo(transform.position) <= Map.ItemSize)
+                if (item.transform.position.DistanceTo(transform.position) <= Settings.ItemSize)
                 {
                     collider = item;
                     break;
@@ -43,20 +42,15 @@ public class Tower : ZumaItem
         if (collider.Distance > inLinePosition)
             collider = collider.Preview;
 
-        var time = _insertTime;
+        var time = Settings.InsertTime;
         var startPosition = transform.position;
         while (time > 0f)
         {
-            var interpolation = 1f - time / _insertTime;
-            transform.position = Vector3.Lerp(startPosition, GetInLinePosition(collider.Distance + Map.ItemSize), interpolation);
-            var offset = Mathf.Lerp(collider.Distance + Map.ItemSize, collider.Distance + Map.ItemSize * 2, interpolation);
-            var next = collider.Next;
-            while (next != null)
-            {
-                next.Distance = offset;
-                next = next.Next;
-                offset += Map.ItemSize;
-            }
+            var interpolation = 1f - time / Settings.InsertTime;
+            transform.position = Vector3.Lerp(startPosition, GetInLinePosition(collider.Distance + Settings.ItemSize), interpolation);
+            var offset = Mathf.Lerp(0f, Settings.ItemSize, interpolation);
+            foreach (var next in collider.Forward(false))
+                next.Offset = offset;
             time -= Time.deltaTime;
             yield return null;
         }
@@ -66,13 +60,10 @@ public class Tower : ZumaItem
             Next.Preview = this;
         items.Insert(items.IndexOf(collider) + 1, this);
         Preview = collider;
+        foreach (var next in collider.Forward(false))
         {
-            var next = collider.Next;
-            while (next != null)
-            {
-                next.Distance = next.Preview.Distance + Map.ItemSize;
-                next = next.Next;
-            }
+            next.Distance = next.Preview.Distance + Settings.ItemSize;
+            next.Offset = 0f;
         }
         _inLine = true;
     }
@@ -80,6 +71,9 @@ public class Tower : ZumaItem
     protected override void Update()
     {
         if (_inLine)
+        {
             base.Update();
+            Health -= Time.deltaTime;
+        }
     }
 }

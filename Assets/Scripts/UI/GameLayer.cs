@@ -21,6 +21,9 @@ public class GameLayer : MonoBehaviour
             _cost.text = '$' + cost.ToString();
         }
     }
+
+    [SerializeField]
+    private Map _map;
     [SerializeField]
     private Text _moneyLabel;
     [SerializeField]
@@ -31,4 +34,10 @@ public class GameLayer : MonoBehaviour
     private string _scorePrefix;
     [SerializeField]
     private NextTowerData[] _nextTowers;
+
+    private void Update()
+    {
+        _moneyLabel.text = _moneyPrefix + _map.Money;
+        _scoreLabel.text = _scorePrefix + _map.Score;
+    }
 }
