@@ -53,3 +53,6 @@ TagManager:
   - name: Health
     uniqueID: 49092119
     locked: 0
+  - name: Laser
+    uniqueID: 4291032477
+    locked: 0

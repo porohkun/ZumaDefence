@@ -33,6 +33,8 @@ public class Map : MonoBehaviour
             {
                 _items.Remove(item);
                 item.transform.position = Vector3.left * 1000f;
+                Money += item.Reward;
+                Score += item.Score;
             }
             else
                 item.Distance += _speed * Time.deltaTime;

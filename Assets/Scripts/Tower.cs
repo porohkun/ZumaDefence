@@ -8,8 +8,13 @@ using UnityEngine;
 public class Tower : ZumaItem
 {
     public int Cost;
+    [SerializeField]
+    private LineRenderer _laser;
+    [SerializeField]
+    private float _dps;
 
     private bool _inLine = false;
+    private ZumaItem _target;
 
     public void BeginFly(List<ZumaItem> items, Vector3 direction)
     {
@@ -73,7 +78,35 @@ public class Tower : ZumaItem
         if (_inLine)
         {
             base.Update();
+            if (Destroyed)
+            {
+                _laser.gameObject.SetActive(false);
+                return;
+            }
+
             Health -= Time.deltaTime;
+            ApplyTowerAction();
         }
+    }
+
+    protected virtual void ApplyTowerAction()
+    {
+        _target = (Next != null && Next.Enemy) ? Next :
+                         (Preview != null && Preview.Enemy) ? Preview :
+                         (Next != null && Next.Next != null && Next.Next.Enemy) ? Next.Next :
+                         (Preview != null && Preview.Preview != null && Preview.Preview.Enemy) ? Preview.Preview :
+                         null;
+
+        if (_target != null)
+        {
+            _laser.gameObject.SetActive(true);
+            var direction = (_target.transform.localPosition - transform.localPosition).normalized;
+            _sprite.rotation = Quaternion.LookRotation(Vector3.forward, direction);
+            _laser.SetPosition(0, transform.position + direction * 13f);
+            _laser.SetPosition(1, _target.transform.position);
+            _target.Health -= _dps * Time.deltaTime;
+        }
+        else
+            _laser.gameObject.SetActive(false);
     }
 }

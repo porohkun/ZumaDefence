@@ -129,9 +129,10 @@ MonoBehaviour:
   - {fileID: 21300016, guid: b2d769b99d01d5c44b1dcd00e0c6b0e3, type: 3}
   Waypoints: []
   LastWaypoint: {fileID: 0}
-  _maxHealth: 6
-  Preview: {fileID: 0}
-  Next: {fileID: 0}
+  _maxHealth: 5
+  Enemy: 1
+  Reward: 5
+  Score: 2
 --- !u!212 &212323474554503376
 SpriteRenderer:
   m_ObjectHideFlags: 1

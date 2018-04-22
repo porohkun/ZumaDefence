@@ -19,6 +19,10 @@ public class ZumaItem : MonoBehaviour, ITwoDirections<ZumaItem>
     [SerializeField]
     private float _maxHealth;
     private float _health;
+    
+    public bool Enemy;
+    public int Reward;
+    public int Score;
 
     public float Health
     {
@@ -83,7 +87,7 @@ public class ZumaItem : MonoBehaviour, ITwoDirections<ZumaItem>
             }
         }
     }
-
+    
     private IEnumerator ReturnOffsetAfterDestroy()
     {
         var sumOffset = 0f;
