@@ -6,12 +6,9 @@ using UnityEngine;
 
 public class RepairTower : Tower
 {
-    [SerializeField]
-    private Transform _explosionPrefab;
-
     protected override void ApplyTowerAction()
     {
-        if (_target == null || _target.Enemy || _target.Destroyed || (_target != Next && _target != Preview) || _target.Health * 1.5f >= _target.MaxHealth)
+        if (_target == null || _target.Enemy != Enemy || _target.Destroyed || (_target != Next && _target != Preview) || _target.Health * 1.2f >= _target.MaxHealth)
             FindTarget();
 
         if (_target != null)
@@ -29,11 +26,16 @@ public class RepairTower : Tower
 
     private void FindTarget()
     {
-        _target = (Next != null && !Next.Enemy && Next.Health * 2f < Next.MaxHealth) ? Next :
-            (Preview != null && !Preview.Enemy && Preview.Health * 2f < Preview.MaxHealth) ? Preview :
-            (Next != null && !Next.Enemy) ? Next :
-            (Preview != null && !Preview.Enemy) ? Preview :
-            null;
+        if (Next != null && Next.Enemy == Enemy && Next.Health * 2f < Next.MaxHealth)
+            _target = Next;
+        else if (Preview != null && Preview.Enemy == Enemy && Preview.Health * 2f < Preview.MaxHealth)
+            _target = Preview;
+        //else if (Next != null && Next.Enemy == Enemy)
+        //    _target = Next;
+        //else if (Preview != null && Preview.Enemy == Enemy)
+        //    _target = Preview;
+        else
+            _target = null;
     }
 
 }

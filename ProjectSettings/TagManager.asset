@@ -56,3 +56,6 @@ TagManager:
   - name: Laser
     uniqueID: 4291032477
     locked: 0
+  - name: FloatText
+    uniqueID: 1079968127
+    locked: 0

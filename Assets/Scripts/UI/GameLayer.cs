@@ -35,6 +35,10 @@ public class GameLayer : MonoBehaviour
     [SerializeField]
     private string _scorePrefix;
     [SerializeField]
+    private Text _timeLabel;
+    [SerializeField]
+    private string _timePrefix;
+    [SerializeField]
     private NextTowerData[] _nextTowers;
 
     private void Update()
@@ -47,6 +51,7 @@ public class GameLayer : MonoBehaviour
 
         _moneyLabel.text = _moneyPrefix + _map.Money;
         _scoreLabel.text = _scorePrefix + _map.Score;
+        _timeLabel.text = _timePrefix + new TimeSpan(0, 0, (int)_map.SpendTime).ToString();
 
         for (int i = 0; i < Math.Min(_turret.NextTowers.Count, _nextTowers.Length); i++)
         {

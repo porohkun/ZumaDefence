@@ -18,15 +18,15 @@ public class DynamiteTower : Tower
     {
         if (Preview != null)
         {
-            Preview.Health = 0;
+            Preview.Health -= _dps;
             if (Preview.Preview != null)
-                Preview.Preview.Health -= Preview.Preview.MaxHealth / 2f;
+                Preview.Preview.Health -= _dps / 2f;
         }
         if (Next != null)
         {
-            Next.Health = 0;
+            Next.Health -= _dps;
             if (Next.Next != null)
-                Next.Next.Health -= Next.Next.MaxHealth / 2f;
+                Next.Next.Health -= _dps / 2f;
         }
 
         var expl = Instantiate(_explosionPrefab);

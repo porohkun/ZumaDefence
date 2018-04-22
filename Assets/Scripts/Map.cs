@@ -6,20 +6,65 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
+    public static Map Instance { get; private set; }
+
+    [Serializable]
+    public class UnitWeightData
+    {
+        [Serializable]
+        public class WeightTime
+        {
+            public float Time;
+            public float Weight;
+        }
+        public ZumaItem Prefab;
+        public WeightTime[] Weights;
+
+        public float GetWeight(float time)
+        {
+            WeightTime a = null;
+            WeightTime b = null;
+
+            foreach (var weight in Weights)
+            {
+                b = weight;
+                if (weight.Time > time)
+                    break;
+                a = weight;
+            }
+
+            if (a == b)
+                return a.Weight;
+
+            var d = b.Time - a.Time;
+            var s = time - a.Time;
+            return Mathf.Lerp(a.Weight, b.Weight, s / d);
+        }
+    }
+
     [SerializeField]
     private float _speed = 5f;
     public Waypoint[] Waypoints;
     [SerializeField]
     private Transform _unitsRoot;
     [SerializeField]
-    private Unit _unitPrefab;
+    private UnitWeightData[] _unitPrefabs;
     public int Money;
     public int Score;
 
+    public float SpendTime { get; private set; }
+
     private List<ZumaItem> _items = new List<ZumaItem>();
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Update()
     {
+        SpendTime += Time.deltaTime;
+
         if (_items.Count == 0 || (_items[0].transform.position - Waypoints[0].transform.position).magnitude >= Settings.ItemSize)
         {
             CreateUnit();
@@ -40,8 +85,6 @@ public class Map : MonoBehaviour
             else
                 item.Distance += _speed * Time.deltaTime;
         }
-
-
     }
 
     public bool CreateTower(Tower prefab, Vector3 startPosition, Vector3 direction)
@@ -60,7 +103,7 @@ public class Map : MonoBehaviour
 
     private void CreateUnit()
     {
-        var unit = Instantiate(_unitPrefab, _unitsRoot);
+        var unit = Instantiate(GetUnitPrefab(), _unitsRoot);
         unit.Waypoints = Waypoints;
         if (_items.Count == 0)
             unit.transform.localPosition = Waypoints[0].transform.localPosition;
@@ -76,6 +119,26 @@ public class Map : MonoBehaviour
         }
         unit.LastWaypoint = Waypoints[0];
         _items.Insert(0, unit);
+    }
+
+    private ZumaItem GetUnitPrefab()
+    {
+        var weights = _unitPrefabs.Select(p => p.GetWeight(SpendTime)).ToArray();
+
+        for (int i = weights.Length - 1; i >= 0; i--)
+            for (int j = i + 1; j < weights.Length; j++)
+                weights[j] += weights[i];
+        var result = weights.Length - 1;
+        var roll = UnityEngine.Random.Range(0f, weights[result]);
+        for (int i = 0; i < weights.Length; i++)
+        {
+            if (weights[i] > roll)
+            {
+                result = i;
+                break;
+            }
+        }
+        return _unitPrefabs[result].Prefab;
     }
 
     private void UpdateIndexes()

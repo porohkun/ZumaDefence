@@ -83,7 +83,7 @@ public class Tower : ZumaItem
 
     protected override void InnerUpdate()
     {
-        if (_inLine)
+        if (_inLine || Enemy)
         {
             base.InnerUpdate();
             if (Destroyed)
@@ -92,7 +92,8 @@ public class Tower : ZumaItem
                 return;
             }
 
-            Health -= Time.deltaTime;
+            if (!Enemy)
+                Health -= Time.deltaTime;
             ApplyTowerAction();
         }
     }

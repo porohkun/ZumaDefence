@@ -11,10 +11,9 @@ public class ZumaItem : MonoBehaviour, ITwoDirections<ZumaItem>
     protected SpriteRenderer _sprite;
     [SerializeField]
     private SpriteRenderer _hpRenderer;
-    public Sprite[] HealthSprites;
 
-    public Waypoint[] Waypoints;
-    public Waypoint LastWaypoint;
+    public Waypoint[] Waypoints { get; set; }
+    public Waypoint LastWaypoint { get; set; }
 
     [SerializeField]
     private float _maxHealth;
@@ -30,7 +29,7 @@ public class ZumaItem : MonoBehaviour, ITwoDirections<ZumaItem>
         set
         {
             _health = Mathf.Min(Mathf.Max(value, 0f), _maxHealth);
-            _hpRenderer.sprite = HealthSprites[(int)(_health / _maxHealth * (HealthSprites.Length - 1))];
+            _hpRenderer.sprite = Settings.HealthSprites[(int)(_health / _maxHealth * (Settings.HealthSprites.Length - 1))];
         }
     }
     public float MaxHealth { get { return _maxHealth; } }
@@ -59,6 +58,7 @@ public class ZumaItem : MonoBehaviour, ITwoDirections<ZumaItem>
     private void Awake()
     {
         _health = _maxHealth;
+        _hpRenderer.color = Enemy ? Settings.EnemyHpColor : Settings.FriendlyHpColor;
     }
 
     private void Update()
@@ -66,13 +66,11 @@ public class ZumaItem : MonoBehaviour, ITwoDirections<ZumaItem>
         if (Offset > 0.001f)
         {
             var offset = Mathf.Min(Offset, Settings.ItemSize * Time.deltaTime / Settings.InsertTime);
-            //Distance += offset;
             Offset -= offset;
         }
         else if (Offset < -0.001f)
         {
             var offset = Mathf.Min(-Offset, Settings.ItemSize * Time.deltaTime / Settings.InsertTime);
-            //Distance -= offset;
             Offset += offset;
         }
         else if (Preview != null)
@@ -100,16 +98,7 @@ public class ZumaItem : MonoBehaviour, ITwoDirections<ZumaItem>
     {
         if (!Destroyed)
         {
-            //if (Preview != null)
-            //{
-            //    var offset = Preview.Distance + Settings.ItemSize - Distance;
-            //    Distance += offset;
-            //    offset -= offset;
-            //}
-
-
             transform.position = Position;
-            //var direction = (LastWaypoint.Next.transform.localPosition - LastWaypoint.transform.localPosition).normalized;
 
             if (Health <= 0f)
             {
@@ -123,7 +112,12 @@ public class ZumaItem : MonoBehaviour, ITwoDirections<ZumaItem>
                     next.Offset += Settings.ItemSize;
                 }
                 Destroyed = true;
-                //StartCoroutine(ReturnOffsetAfterDestroy());
+                if (Reward > 0)
+                {
+                    var floatText = Instantiate(Settings.FloatTextPrefab);
+                    floatText.Text = "$" + Reward;
+                    floatText.transform.position = transform.position + Vector3.back * 5;
+                }
             }
         }
     }
