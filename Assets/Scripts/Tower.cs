@@ -101,7 +101,7 @@ public class Tower : ZumaItem
         {
             _laser.gameObject.SetActive(true);
             var direction = (_target.transform.localPosition - transform.localPosition).normalized;
-            _sprite.rotation = Quaternion.LookRotation(Vector3.forward, direction);
+            Rotation = Quaternion.LookRotation(Vector3.forward, direction);
             _laser.SetPosition(0, transform.position + direction * 13f);
             _laser.SetPosition(1, _target.transform.position);
             _target.Health -= _dps * Time.deltaTime;

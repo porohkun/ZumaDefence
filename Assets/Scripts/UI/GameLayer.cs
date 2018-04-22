@@ -25,6 +25,8 @@ public class GameLayer : MonoBehaviour
     [SerializeField]
     private Map _map;
     [SerializeField]
+    private TurretMotor _turret;
+    [SerializeField]
     private Text _moneyLabel;
     [SerializeField]
     private string _moneyPrefix;
@@ -39,5 +41,11 @@ public class GameLayer : MonoBehaviour
     {
         _moneyLabel.text = _moneyPrefix + _map.Money;
         _scoreLabel.text = _scorePrefix + _map.Score;
+
+        for (int i = 0; i < Math.Min(_turret.NextTowers.Count, _nextTowers.Length); i++)
+        {
+            var t = _turret.NextTowers[i];
+            _nextTowers[i].SetTower(t.GetSprite(), t.Cost);
+        }
     }
 }

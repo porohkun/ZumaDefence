@@ -8,7 +8,7 @@ using UnityEngine;
 public class ZumaItem : MonoBehaviour, ITwoDirections<ZumaItem>
 {
     [SerializeField]
-    protected Transform _sprite;
+    protected SpriteRenderer _sprite;
     [SerializeField]
     private SpriteRenderer _hpRenderer;
     public Sprite[] HealthSprites;
@@ -19,7 +19,7 @@ public class ZumaItem : MonoBehaviour, ITwoDirections<ZumaItem>
     [SerializeField]
     private float _maxHealth;
     private float _health;
-    
+
     public bool Enemy;
     public int Reward;
     public int Score;
@@ -33,11 +33,17 @@ public class ZumaItem : MonoBehaviour, ITwoDirections<ZumaItem>
             _hpRenderer.sprite = HealthSprites[(int)(_health / _maxHealth * (HealthSprites.Length - 1))];
         }
     }
+    public float MaxHealth { get { return _maxHealth; } }
 
     public Quaternion Rotation
     {
-        get { return _sprite.rotation; }
-        set { _sprite.rotation = value; }
+        get { return _sprite.transform.rotation; }
+        set { _sprite.transform.rotation = value; }
+    }
+
+    public virtual void BeforeDestroyAction()
+    {
+
     }
 
     public float Distance { get; set; }
@@ -87,7 +93,7 @@ public class ZumaItem : MonoBehaviour, ITwoDirections<ZumaItem>
             }
         }
     }
-    
+
     private IEnumerator ReturnOffsetAfterDestroy()
     {
         var sumOffset = 0f;
@@ -119,5 +125,10 @@ public class ZumaItem : MonoBehaviour, ITwoDirections<ZumaItem>
                 dist -= wp.DistanceToNext;
         }
         return position;
+    }
+
+    public Sprite GetSprite()
+    {
+        return _sprite.sprite;
     }
 }

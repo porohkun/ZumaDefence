@@ -32,6 +32,7 @@ public class Map : MonoBehaviour
             if (item.Destroyed)
             {
                 _items.Remove(item);
+                item.BeforeDestroyAction();
                 item.transform.position = Vector3.left * 1000f;
                 Money += item.Reward;
                 Score += item.Score;

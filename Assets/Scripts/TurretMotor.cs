@@ -10,8 +10,17 @@ public class TurretMotor : MonoBehaviour
     [SerializeField]
     private Tower[] _towerPrefabs;
 
+    public List<Tower> NextTowers { get; private set; }
+
+    private void Awake()
+    {
+        NextTowers = new List<Tower>();
+    }
+
     private void Update()
     {
+        while (NextTowers.Count < 4)
+            NextTowers.Add(_towerPrefabs[Random.Range(0, _towerPrefabs.Length)]);
         var curPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var direction = (curPos - transform.position).normalized;
         direction.z = 0f;
@@ -19,12 +28,9 @@ public class TurretMotor : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            _map.CreateTower(GetRndTowerPrefab(), transform.localPosition, direction);
+            var nextTower = NextTowers[0];
+            if (_map.CreateTower(nextTower, transform.localPosition, direction))
+                NextTowers.RemoveAt(0);
         }
-    }
-
-    private Tower GetRndTowerPrefab()
-    {
-        return _towerPrefabs[Random.Range(0, _towerPrefabs.Length)];
     }
 }
