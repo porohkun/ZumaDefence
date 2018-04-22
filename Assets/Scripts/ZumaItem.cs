@@ -41,6 +41,8 @@ public class ZumaItem : MonoBehaviour, ITwoDirections<ZumaItem>
         set { _sprite.transform.rotation = value; }
     }
 
+    public Vector3 Position { get; private set; }
+
     public virtual void BeforeDestroyAction()
     {
 
@@ -59,22 +61,54 @@ public class ZumaItem : MonoBehaviour, ITwoDirections<ZumaItem>
         _health = _maxHealth;
     }
 
-    protected virtual void Update()
+    private void Update()
+    {
+        if (Offset > 0.001f)
+        {
+            var offset = Mathf.Min(Offset, Settings.ItemSize * Time.deltaTime / Settings.InsertTime);
+            //Distance += offset;
+            Offset -= offset;
+        }
+        else if (Offset < -0.001f)
+        {
+            var offset = Mathf.Min(-Offset, Settings.ItemSize * Time.deltaTime / Settings.InsertTime);
+            //Distance -= offset;
+            Offset += offset;
+        }
+        else if (Preview != null)
+        {
+            var offset = Preview.Distance + Settings.ItemSize - Distance;
+            Distance += offset;
+            offset -= offset;
+        }
+        var dist = Distance + Offset;
+        foreach (var wp in Waypoints)
+        {
+            if (dist < wp.DistanceToNext)
+            {
+                Position = wp.transform.position + wp.Direction * dist;
+                LastWaypoint = wp;
+                break;
+            }
+            else
+                dist -= wp.DistanceToNext;
+        }
+        InnerUpdate();
+    }
+
+    protected virtual void InnerUpdate()
     {
         if (!Destroyed)
         {
-            var dist = Distance + Offset;
-            foreach (var wp in Waypoints)
-            {
-                if (dist < wp.DistanceToNext)
-                {
-                    transform.position = wp.transform.position + wp.Direction * dist;
-                    LastWaypoint = wp;
-                    break;
-                }
-                else
-                    dist -= wp.DistanceToNext;
-            }
+            //if (Preview != null)
+            //{
+            //    var offset = Preview.Distance + Settings.ItemSize - Distance;
+            //    Distance += offset;
+            //    offset -= offset;
+            //}
+
+
+            transform.position = Position;
             //var direction = (LastWaypoint.Next.transform.localPosition - LastWaypoint.transform.localPosition).normalized;
 
             if (Health <= 0f)
@@ -89,7 +123,7 @@ public class ZumaItem : MonoBehaviour, ITwoDirections<ZumaItem>
                     next.Offset += Settings.ItemSize;
                 }
                 Destroyed = true;
-                StartCoroutine(ReturnOffsetAfterDestroy());
+                //StartCoroutine(ReturnOffsetAfterDestroy());
             }
         }
     }

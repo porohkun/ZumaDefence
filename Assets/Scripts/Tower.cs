@@ -34,7 +34,7 @@ public class Tower : ZumaItem
                 Destroy(gameObject);
 
             foreach (var item in items)
-                if (item.transform.position.DistanceTo(transform.position) <= Settings.ItemSize)
+                if (item.Position.DistanceTo(transform.position) <= Settings.ItemSize)
                 {
                     collider = item;
                     break;
@@ -49,35 +49,43 @@ public class Tower : ZumaItem
 
         var time = Settings.InsertTime;
         var startPosition = transform.position;
-        while (time > 0f)
+        foreach (var next in collider.Forward(false))
         {
-            var interpolation = 1f - time / Settings.InsertTime;
-            transform.position = Vector3.Lerp(startPosition, GetInLinePosition(collider.Distance + Settings.ItemSize), interpolation);
-            var offset = Mathf.Lerp(0f, Settings.ItemSize, interpolation);
-            foreach (var next in collider.Forward(false))
-                next.Offset = offset;
-            time -= Time.deltaTime;
-            yield return null;
+            next.Distance += Settings.ItemSize;
+            next.Offset -= Settings.ItemSize;
         }
+
         Next = collider.Next;
         collider.Next = this;
         if (Next != null)
             Next.Preview = this;
         items.Insert(items.IndexOf(collider) + 1, this);
         Preview = collider;
-        foreach (var next in collider.Forward(false))
+        Distance = Preview.Distance + Settings.ItemSize;
+        Offset = Preview.Offset;
+
+        while (time > 0f)
         {
-            next.Distance = next.Preview.Distance + Settings.ItemSize;
-            next.Offset = 0f;
+            var interpolation = 1f - time / Settings.InsertTime;
+            transform.position = Vector3.Lerp(startPosition, GetInLinePosition(collider.Distance + Settings.ItemSize), interpolation);
+            //var offset = Mathf.Lerp(0f, Settings.ItemSize, interpolation);
+            time -= Time.deltaTime;
+            yield return null;
         }
+
+        //foreach (var next in collider.Forward(false))
+        //{
+        //    next.Distance = next.Preview.Distance + Settings.ItemSize;
+        //    next.Offset = 0f;
+        //}
         _inLine = true;
     }
 
-    protected override void Update()
+    protected override void InnerUpdate()
     {
         if (_inLine)
         {
-            base.Update();
+            base.InnerUpdate();
             if (Destroyed)
             {
                 _laser.gameObject.SetActive(false);

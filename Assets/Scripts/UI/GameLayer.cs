@@ -39,6 +39,12 @@ public class GameLayer : MonoBehaviour
 
     private void Update()
     {
+        var hurry = Input.GetKey(KeyCode.H);
+        var slow = Input.GetKey(KeyCode.S);
+
+        Time.timeScale = hurry ? 10f : (slow ? 0.1f : 1f);
+
+
         _moneyLabel.text = _moneyPrefix + _map.Money;
         _scoreLabel.text = _scorePrefix + _map.Score;
 

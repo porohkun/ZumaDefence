@@ -33,9 +33,9 @@ public class Map : MonoBehaviour
             {
                 _items.Remove(item);
                 item.BeforeDestroyAction();
-                item.transform.position = Vector3.left * 1000f;
                 Money += item.Reward;
                 Score += item.Score;
+                Destroy(item.gameObject);
             }
             else
                 item.Distance += _speed * Time.deltaTime;
