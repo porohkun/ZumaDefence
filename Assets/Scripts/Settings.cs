@@ -28,6 +28,9 @@ public class Settings : MonoBehaviour
     public static Color FriendlyHpColor { get { return Instance._friendlyHpColor; } }
     public static Color EnemyHpColor { get { return Instance._enemyHpColor; } }
     public static Sprite[] HealthSprites { get { return Instance._healthSprites; } }
+
+    public static float MoneyMod { get; internal set; }
+
     public static FloatText FloatTextPrefab { get { return Instance._floatTextPrefab; } }
 
 

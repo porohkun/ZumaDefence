@@ -49,6 +49,7 @@ public class Map : MonoBehaviour
     private Transform _unitsRoot;
     [SerializeField]
     private UnitWeightData[] _unitPrefabs;
+    public TurretMotor Turret;
     public int Money;
     public int Score;
 
@@ -78,7 +79,7 @@ public class Map : MonoBehaviour
             {
                 _items.Remove(item);
                 item.BeforeDestroyAction();
-                Money += item.Reward;
+                Money += Mathf.RoundToInt(item.Reward * Settings.MoneyMod);
                 Score += item.Score;
                 Destroy(item.gameObject);
             }

@@ -89,7 +89,20 @@ public class ZumaItem : MonoBehaviour, ITwoDirections<ZumaItem>
                 break;
             }
             else
+            {
                 dist -= wp.DistanceToNext;
+                if (wp.Next == null)
+                {
+                    Time.timeScale = 0f;
+                    LayersManager.FadeOut(0.5f, () =>
+                    {
+                        LayersManager.Push<GameOverLayer>().Initialize(Map.Instance.SpendTime, Map.Instance.Score);
+                        LayersManager.GetLayer<GameLayer>().Clear();
+                        LayersManager.FadeIn(0.5f, null);
+                    });
+                    enabled = false;
+                }
+            }
         }
         InnerUpdate();
     }
@@ -115,7 +128,7 @@ public class ZumaItem : MonoBehaviour, ITwoDirections<ZumaItem>
                 if (Reward > 0)
                 {
                     var floatText = Instantiate(Settings.FloatTextPrefab);
-                    floatText.Text = "$" + Reward;
+                    floatText.Text = "$" + Mathf.RoundToInt(Reward * Settings.MoneyMod);
                     floatText.transform.position = transform.position + Vector3.back * 5;
                 }
             }

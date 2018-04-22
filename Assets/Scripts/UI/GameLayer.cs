@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameLayer : MonoBehaviour
+public class GameLayer : LayerBase
 {
     [Serializable]
     public class NextTowerData
@@ -23,9 +23,7 @@ public class GameLayer : MonoBehaviour
     }
 
     [SerializeField]
-    private Map _map;
-    [SerializeField]
-    private TurretMotor _turret;
+    private Map _mapPrefab;
     [SerializeField]
     private Text _moneyLabel;
     [SerializeField]
@@ -41,13 +39,28 @@ public class GameLayer : MonoBehaviour
     [SerializeField]
     private NextTowerData[] _nextTowers;
 
+    private Map _map;
+    private TurretMotor _turret;
+
+    public void Initialize(float speed, float moneyMod)
+    {
+        _map = Instantiate(_mapPrefab);
+        _map.transform.position = Vector3.zero;
+        _map.transform.localScale = Vector3.one;
+        _turret = _map.Turret;
+        Settings.MoneyMod = moneyMod;
+        Time.timeScale = speed;
+    }
+
     private void Update()
     {
-        var hurry = Input.GetKey(KeyCode.H);
-        var slow = Input.GetKey(KeyCode.S);
+        if (Application.isEditor)
+        {
+            var hurry = Input.GetKey(KeyCode.H);
+            var slow = Input.GetKey(KeyCode.S);
 
-        Time.timeScale = hurry ? 10f : (slow ? 0.1f : 1f);
-
+            Time.timeScale = hurry ? 10f : (slow ? 0.1f : 1f);
+        }
 
         _moneyLabel.text = _moneyPrefix + _map.Money;
         _scoreLabel.text = _scorePrefix + _map.Score;
@@ -58,5 +71,10 @@ public class GameLayer : MonoBehaviour
             var t = _turret.NextTowers[i];
             _nextTowers[i].SetTower(t.GetSprite(), t.Cost);
         }
+    }
+
+    internal void Clear()
+    {
+        Destroy(_map.gameObject);
     }
 }

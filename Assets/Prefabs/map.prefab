@@ -1316,6 +1316,7 @@ MonoBehaviour:
       Weight: 0
     - Time: 300
       Weight: 2
+  Turret: {fileID: 114315733245112508}
   Money: 100
   Score: 0
 --- !u!120 &120002152454553230
