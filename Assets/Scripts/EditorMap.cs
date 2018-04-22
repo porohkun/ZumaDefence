@@ -12,21 +12,25 @@ public class EditorMap : MonoBehaviour
 
     private void Awake()
     {
-        if (Application.platform == RuntimePlatform.WindowsEditor && Application.isPlaying)
+        Debug.Log("====EditorMap.Awake start");
+        if (Application.isPlaying)
         {
-            Update();
+            //Update();
             if (_map != null)
                 for (int i = 0; i < _map.Waypoints.Length; i++)
                 {
                     _map.Waypoints[i].gameObject.SetActive(false);
-                    _map.Waypoints[i].Start();
+                    Debug.Log("====Waypoint deactivated");
+                    _map.Waypoints[i].UpdateDistance();
                 }
             Destroy(this);
         }
+        Debug.Log("====EditorMap.Awake end");
     }
 
     private void Update()
     {
+        Debug.Log("====EditorMap.Update start");
         if (_map != null)
         {
             for (int i = 0; i < _map.Waypoints.Length; i++)
@@ -49,5 +53,6 @@ public class EditorMap : MonoBehaviour
                 }
             }
         }
+        Debug.Log("====EditorMap.Update end");
     }
 }

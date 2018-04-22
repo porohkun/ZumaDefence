@@ -5,8 +5,12 @@ using UnityEngine;
 public class Waypoint : MonoBehaviour, ITwoDirections<Waypoint>
 {
     public LineRenderer Line;
-    public Waypoint Preview { get; set; }
-    public Waypoint Next { get; set; }
+    [SerializeField]
+    private Waypoint _previewSerialized;
+    [SerializeField]
+    private Waypoint _nextSerialized;
+    public Waypoint Preview { get { return _previewSerialized; } set { _previewSerialized = value; } }
+    public Waypoint Next { get { return _nextSerialized; } set { _nextSerialized = value; } }
 
     public float DistanceToNext { get; private set; }
     public Vector3 Direction { get { return (Next.transform.position - transform.position).normalized; } }
@@ -26,7 +30,7 @@ public class Waypoint : MonoBehaviour, ITwoDirections<Waypoint>
         }
     }
 
-    public void Start()
+    public void UpdateDistance()
     {
         if (Next != null)
             DistanceToNext = transform.position.DistanceTo(Next.transform.position);
