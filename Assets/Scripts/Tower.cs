@@ -9,12 +9,12 @@ public class Tower : ZumaItem
 {
     public int Cost;
     [SerializeField]
-    private LineRenderer _laser;
+    protected LineRenderer _laser;
     [SerializeField]
-    private float _dps;
+    protected float _dps;
 
     private bool _inLine = false;
-    private ZumaItem _target;
+    protected ZumaItem _target;
 
     public void BeginFly(List<ZumaItem> items, Vector3 direction)
     {
@@ -100,10 +100,10 @@ public class Tower : ZumaItem
     protected virtual void ApplyTowerAction()
     {
         _target = (Next != null && Next.Enemy) ? Next :
-                         (Preview != null && Preview.Enemy) ? Preview :
-                         (Next != null && Next.Next != null && Next.Next.Enemy) ? Next.Next :
-                         (Preview != null && Preview.Preview != null && Preview.Preview.Enemy) ? Preview.Preview :
-                         null;
+            (Preview != null && Preview.Enemy) ? Preview :
+            (Next != null && Next.Next != null && Next.Next.Enemy) ? Next.Next :
+            (Preview != null && Preview.Preview != null && Preview.Preview.Enemy) ? Preview.Preview :
+            null;
 
         if (_target != null)
         {

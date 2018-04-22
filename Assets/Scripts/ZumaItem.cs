@@ -29,7 +29,7 @@ public class ZumaItem : MonoBehaviour, ITwoDirections<ZumaItem>
         get { return _health; }
         set
         {
-            _health = Math.Max(value, 0f);
+            _health = Mathf.Min(Mathf.Max(value, 0f), _maxHealth);
             _hpRenderer.sprite = HealthSprites[(int)(_health / _maxHealth * (HealthSprites.Length - 1))];
         }
     }

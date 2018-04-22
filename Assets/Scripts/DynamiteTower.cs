@@ -17,13 +17,17 @@ public class DynamiteTower : Tower
     public override void BeforeDestroyAction()
     {
         if (Preview != null)
+        {
             Preview.Health = 0;
+            if (Preview.Preview != null)
+                Preview.Preview.Health -= Preview.Preview.MaxHealth / 2f;
+        }
         if (Next != null)
+        {
             Next.Health = 0;
-        if (Preview.Preview != null)
-            Preview.Preview.Health -= Preview.Preview.MaxHealth / 2f;
-        if (Next.Next != null)
-            Next.Next.Health -= Next.Next.MaxHealth / 2f;
+            if (Next.Next != null)
+                Next.Next.Health -= Next.Next.MaxHealth / 2f;
+        }
 
         var expl = Instantiate(_explosionPrefab);
         expl.position = transform.position;

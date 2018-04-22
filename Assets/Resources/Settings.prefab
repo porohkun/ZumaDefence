@@ -52,5 +52,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemSize: 32
-  _towerFlySpeed: 400
-  _insertTime: 0.2
+  _towerFlySpeed: 500
+  _insertTime: 0.1
