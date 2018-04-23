@@ -9,8 +9,13 @@ public class TurretMotor : MonoBehaviour
     private Map _map;
     [SerializeField]
     private Tower[] _towerPrefabs;
+    [SerializeField]
+    private float _checkTime = 2f;
 
     public List<Tower> NextTowers { get; private set; }
+
+    private float _time = 0f;
+    private int _check = 0;
 
     private void Awake()
     {
@@ -19,6 +24,31 @@ public class TurretMotor : MonoBehaviour
 
     private void Update()
     {
+        _time += Time.unscaledDeltaTime;
+        if (_time > _checkTime)
+        {
+            bool check = false;
+            _time -= _checkTime;
+            if (NextTowers[0].Cost > Map.Instance.Money)
+            {
+                check = true;
+                foreach (var item in Map.Instance.Items)
+                    if (!item.Enemy && !(item is RepairTower))
+                    {
+                        check = false;
+                        break;
+                    }
+            }
+            if (check)
+                _check++;
+            else
+                _check = 0;
+            if (_check == 3)
+            {
+                Time.timeScale *= 10f;
+            }
+        }
+
         while (NextTowers.Count < 4)
             NextTowers.Add(_towerPrefabs[Random.Range(0, _towerPrefabs.Length)]);
         var curPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

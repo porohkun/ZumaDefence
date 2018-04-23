@@ -55,13 +55,13 @@ public class GameLayer : LayerBase
 
     private void Update()
     {
-        if (Application.isEditor)
-        {
-            var hurry = Input.GetKey(KeyCode.H);
-            var slow = Input.GetKey(KeyCode.S);
+        //if (Application.isEditor)
+        //{
+        //    var hurry = Input.GetKey(KeyCode.H);
+        //    var slow = Input.GetKey(KeyCode.S);
 
-            Time.timeScale = hurry ? 10f : (slow ? 0.1f : 1f);
-        }
+        //    Time.timeScale = hurry ? 10f : (slow ? 0.1f : 1f);
+        //}
 
         _moneyLabel.text = _moneyPrefix + _map.Money;
         _scoreLabel.text = _scorePrefix + _map.Score;

@@ -58,6 +58,19 @@ public class Map : MonoBehaviour
     private List<ZumaItem> _items = new List<ZumaItem>();
     internal string Difficulty;
 
+    public IEnumerable<ZumaItem> Items
+    {
+        get
+        {
+            var item = _items[0];
+            while (item != null)
+            {
+                yield return item;
+                item = item.Next;
+            }
+        }
+    }
+
     private void Awake()
     {
         Instance = this;

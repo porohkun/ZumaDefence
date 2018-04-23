@@ -71,7 +71,7 @@ public class PlayFab : MonoBehaviour
     public static void SendName(string name, Action callback)
     {
         var json = new JsonObject(
-            new JOPair("DisplayName", name)
+            new JOPair("DisplayName", System.Guid.NewGuid().ToString().Substring(0, 6) + "|" + name)
             );
 
         _instance.StartCoroutine(_instance.Send(json, ApiCall.UpdateUserTitleDisplayName, (_) => { if (callback != null) callback(); }));
@@ -104,7 +104,7 @@ public class PlayFab : MonoBehaviour
                  var lb = new LeaderBoard();
                  foreach (JsonObject position in jsonResponse["data"]["Leaderboard"].Array)
                  {
-                     var name = position.ContainsKey("DisplayName") ? position["DisplayName"] : position["PlayFabId"];
+                     var name = position.ContainsKey("DisplayName") ? position["DisplayName"].String.Substring(7) : position["PlayFabId"].String;
                      var score = position["StatValue"];
                      var pos = position["Position"];
                      lb.SetPosition(pos, name, score);
