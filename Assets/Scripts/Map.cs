@@ -56,6 +56,7 @@ public class Map : MonoBehaviour
     public float SpendTime { get; private set; }
 
     private List<ZumaItem> _items = new List<ZumaItem>();
+    internal string Difficulty;
 
     private void Awake()
     {

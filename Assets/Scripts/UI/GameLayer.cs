@@ -42,9 +42,10 @@ public class GameLayer : LayerBase
     private Map _map;
     private TurretMotor _turret;
 
-    public void Initialize(float speed, float moneyMod)
+    public void Initialize(string difficulty, float speed, float moneyMod)
     {
         _map = Instantiate(_mapPrefab);
+        _map.Difficulty = difficulty;
         _map.transform.position = Vector3.zero;
         _map.transform.localScale = Vector3.one;
         _turret = _map.Turret;

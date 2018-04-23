@@ -11,7 +11,7 @@ public class MenuLayer : LayerBase
     {
         LayersManager.FadeOut(0.5f, () =>
         {
-            LayersManager.Push<GameLayer>().Initialize(0.7f, 1.5f);
+            LayersManager.Push<GameLayer>().Initialize("Easy", 0.7f, 1.5f);
             LayersManager.FadeIn(0.5f, null);
         });
     }
@@ -20,7 +20,7 @@ public class MenuLayer : LayerBase
     {
         LayersManager.FadeOut(0.5f, () =>
         {
-            LayersManager.Push<GameLayer>().Initialize(1f, 1f);
+            LayersManager.Push<GameLayer>().Initialize("Medium", 1f, 1f);
             LayersManager.FadeIn(0.5f, null);
         });
     }
@@ -29,7 +29,16 @@ public class MenuLayer : LayerBase
     {
         LayersManager.FadeOut(0.5f, () =>
         {
-            LayersManager.Push<GameLayer>().Initialize(1f, 0.65f);
+            LayersManager.Push<GameLayer>().Initialize("Hard", 1f, 0.65f);
+            LayersManager.FadeIn(0.5f, null);
+        });
+    }
+
+    public void OnLeaderBoard()
+    {
+        LayersManager.FadeOut(0.5f, () =>
+        {
+            LayersManager.Push<LeaderBoardLayer>();
             LayersManager.FadeIn(0.5f, null);
         });
     }

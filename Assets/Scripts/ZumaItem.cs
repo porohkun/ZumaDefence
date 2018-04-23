@@ -96,7 +96,7 @@ public class ZumaItem : MonoBehaviour, ITwoDirections<ZumaItem>
                     Time.timeScale = 0f;
                     LayersManager.FadeOut(0.5f, () =>
                     {
-                        LayersManager.Push<GameOverLayer>().Initialize(Map.Instance.SpendTime, Map.Instance.Score);
+                        LayersManager.Push<GameOverLayer>().Initialize(Map.Instance.Difficulty, Map.Instance.SpendTime, Map.Instance.Score);
                         LayersManager.GetLayer<GameLayer>().Clear();
                         LayersManager.FadeIn(0.5f, null);
                     });
